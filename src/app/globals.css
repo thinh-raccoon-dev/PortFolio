@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root,
+[data-theme="dark"] {
+  --bg: #000000;
+  --bg-card: #101010;
+  --bg-card-alt: #212121;
+  --text-primary: #e1e0cc;
+  --text-muted: rgba(225, 224, 204, 0.7);
+  --primary: #dedbc8;
+  --border: #2a2a2a;
+  --btn-text: #000000;
+  --nav-bg: #000000;
+  --hero-gradient-from: rgba(0, 0, 0, 0.3);
+  --hero-gradient-to: rgba(0, 0, 0, 0.6);
+  --hero-text: #e1e0cc;
+  --card-overlay: rgba(0, 0, 0, 0.7);
+  --muted-gray: #9ca3af;
+}
+
+[data-theme="light"] {
+  --bg: #f5f3eb;
+  --bg-card: #ebe8dc;
+  --bg-card-alt: #dedbc8;
+  --text-primary: #1a1a18;
+  --text-muted: rgba(26, 26, 24, 0.65);
+  --primary: #3d3d38;
+  --border: #cfc9b8;
+  --btn-text: #f5f3eb;
+  --nav-bg: #3d3d38;
+  --hero-gradient-from: rgba(245, 243, 235, 0.35);
+  --hero-gradient-to: rgba(26, 26, 24, 0.45);
+  --hero-text: #f5f3eb;
+  --card-overlay: rgba(26, 26, 24, 0.55);
+  --muted-gray: #6b7280;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-card: var(--bg-card);
+  --color-bg-card-alt: var(--bg-card-alt);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--primary);
+  --color-border: var(--border);
+  --font-sans: var(--font-almarai);
+  --font-serif: var(--font-instrument-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-almarai), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--btn-text);
+}
+
+#smooth-wrapper {
+  overflow: hidden;
+}
+
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
